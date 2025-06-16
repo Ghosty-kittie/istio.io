@@ -18,36 +18,50 @@ set -ex
 
 mkdir -p generated/js generated/img tmp/js
 
+
 tsc
 
-babel --source-maps --minified --no-comments --presets minify \
-  tmp/js/constants.js \
-  tmp/js/utils.js \
-  tmp/js/feedback.js \
-  tmp/js/kbdnav.js \
-  tmp/js/themes.js \
-  tmp/js/menu.js \
-  tmp/js/header.js \
-  tmp/js/sidebar.js \
-  tmp/js/tabset.js \
-  tmp/js/prism.js \
-  tmp/js/codeBlocks.js \
-  tmp/js/links.js \
-  tmp/js/resizeObserver.js \
-  tmp/js/scroll.js \
-  tmp/js/overlays.js \
-  tmp/js/lang.js \
-  tmp/js/callToAction.js \
-  tmp/js/events.js \
-  tmp/js/faq.js \
-  --out-file generated/js/all.min.js
+#Entrypoint for esbuild to bundle and minify through an entrypoint.js file
+cat <<EOF > tmp/js/entrypoint.js
+import "./constants.js";
+import "./utils.js";
+import "./feedback.js";
+import "./kbdnav.js";
+import "./themes.js";
+import "./menu.js";
+import "./header.js";
+import "./sidebar.js";
+import "./tabset.js";
+import "./prism.js";
+import "./codeBlocks.js";
+import "./links.js";
+import "./resizeObserver.js";
+import "./scroll.js";
+import "./overlays.js";
+import "./lang.js";
+import "./callToAction.js";
+import "./events.js";
+import "./faq.js";
+EOF
 
-babel --source-maps --minified --no-comments --presets minify \
-  tmp/js/headerAnimation.js \
-  --out-file generated/js/headerAnimation.min.js
+# Bundle + minify with sourcemap
+esbuild tmp/js/entrypoint.js \
+  --bundle \
+  --minify \
+  --sourcemap \
+  --target=es6 \
+  --outfile=generated/js/all.min.js
 
-babel --source-maps --minified --no-comments \
-  tmp/js/themes_init.js \
-  --out-file generated/js/themes_init.min.js
+esbuild tmp/js/headerAnimation.js \
+  --minify \
+  --sourcemap \
+  --target=es6 \
+  --outfile=generated/js/headerAnimation.min.js
+
+esbuild tmp/js/themes_init.js \
+  --minify \
+  --sourcemap \
+  --target=es6 \
+  --outfile=generated/js/themes_init.min.js
 
 svgstore -o generated/img/icons.svg src/icons/**/*.svg

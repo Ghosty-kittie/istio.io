@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const darkThemeClass = "dark-theme";
-const darkTheme = "Dark Theme";
-const darkThemeItem = "dark-theme-item";
-const lightTheme = "Light Theme";
-const lightThemeItem = "light-theme-item";
-const themeStorageItem = "style";
+export const darkThemeClass = "dark-theme";
+export const darkTheme = "Dark Theme";
+export const darkThemeItem = "dark-theme-item";
+export const lightTheme = "Light Theme";
+export const lightThemeItem = "light-theme-item";
+export const themeStorageItem = "style";
 
-function applyStyleSheet(theme: string | null): void {
+export function applyStyleSheet(theme: string | null): void {
     // convert legacy cookie values
     if (theme === "dark") {
         theme = darkTheme;
@@ -38,23 +38,23 @@ function applyStyleSheet(theme: string | null): void {
     let item = document.getElementById(lightThemeItem);
     if (item) {
         if (theme === darkTheme) {
-            item.classList.remove(active);
+            item.classList.remove("active");
         } else {
-            item.classList.add(active);
+            item.classList.add("active");
         }
     }
 
     item = document.getElementById(darkThemeItem);
     if (item) {
         if (theme === darkTheme) {
-            item.classList.add(active);
+            item.classList.add("active");
         } else {
-            item.classList.remove(active);
+            item.classList.remove("active");
         }
     }
 }
 
-function readLocalStorage(name: string): string | null {
+export function readLocalStorage(name: string): string | null {
     let value = localStorage.getItem(name);
     if (value) {
         return value;
@@ -93,7 +93,7 @@ function readSystemDefault(): string | null {
     return null;
 }
 
-let currentTheme = readLocalStorage(themeStorageItem);
+export let currentTheme = readLocalStorage(themeStorageItem);
 if (currentTheme === null) {
     currentTheme = readSystemDefault();
 }
