@@ -59,6 +59,7 @@ esbuild tmp/js/headerAnimation.js \
   --outfile=generated/js/headerAnimation.min.js
 
 esbuild tmp/js/themes_init.js \
+  --bundle \
   --minify \
   --sourcemap \
   --target=es6 \
