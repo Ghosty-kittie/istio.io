@@ -19,6 +19,10 @@ export const lightTheme = "Light Theme";
 export const lightThemeItem = "light-theme-item";
 export const themeStorageItem = "style";
 
+// Export should be defined at the top of the module
+
+export let currentTheme = readLocalStorage(themeStorageItem);
+
 export function applyStyleSheet(theme: string | null): void {
     // convert legacy cookie values
     if (theme === "dark") {
@@ -93,7 +97,6 @@ function readSystemDefault(): string | null {
     return null;
 }
 
-export let currentTheme = readLocalStorage(themeStorageItem);
 if (currentTheme === null) {
     currentTheme = readSystemDefault();
 }
