@@ -21,31 +21,10 @@ mkdir -p generated/js generated/img tmp/js
 
 tsc
 
-#Entrypoint for esbuild to bundle and minify through an entrypoint.js file
-cat <<EOF > tmp/js/entrypoint.js
-import "./constants.js";
-import "./utils.js";
-import "./feedback.js";
-import "./kbdnav.js";
-import "./themes.js";
-import "./menu.js";
-import "./header.js";
-import "./sidebar.js";
-import "./tabset.js";
-import "./prism.js";
-import "./codeBlocks.js";
-import "./links.js";
-import "./resizeObserver.js";
-import "./scroll.js";
-import "./overlays.js";
-import "./lang.js";
-import "./callToAction.js";
-import "./events.js";
-import "./faq.js";
-EOF
+
 
 # Bundle + minify with sourcemap
-esbuild tmp/js/entrypoint.js \
+esbuild src/ts/entrypoint.js \
   --bundle \
   --minify \
   --sourcemap \

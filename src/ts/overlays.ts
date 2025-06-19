@@ -17,8 +17,9 @@ declare class Popper {
     constructor(a: HTMLElement, b: HTMLElement, c: any);
     public destroy(): void;
 }
-declare var iconFile: string;
+
 // Path to the SVG icon sprite file
+declare var iconFile: string;
 
 // tracks any overlay displayed on the page (e.g. menu or popover)
 let overlay: HTMLElement | null = null;
