@@ -128,7 +128,7 @@ lint-fast: clean_public build_nominify lint-copyright-banner lint-python lint-ya
 lint-md: clean_public build_nominify
 	@SKIP_LINK_CHECK=true scripts/lint_site.sh en
 
-serve: site
+serve: clean site
 	@hugo serve --baseURL "http://${ISTIO_SERVE_DOMAIN}:1313/latest/" --bind 0.0.0.0 --watch --disableFastRender
 
 archive-version:
