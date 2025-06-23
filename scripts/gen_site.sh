@@ -18,7 +18,6 @@ set -ex
 
 mkdir -p generated/js generated/img tmp/js
 
-
 tsc
 
 
